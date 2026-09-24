@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <title>Fotolab</title>
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <main id="screen-who" class="screen">
+    <h1>Fotolab</h1>
+    <p>Kdo jsi?</p>
+    <div id="who-list" class="who-list"></div>
+    <form id="pin-form" hidden>
+      <label>PIN pro <b id="pin-name"></b> <input id="pin" type="password" inputmode="numeric" autocomplete="off"></label>
+      <button>OK</button>
+      <span id="pin-error" class="error"></span>
+    </form>
+    <footer>
+      <button id="admin-btn" type="button">⚙ Administrace</button>
+    </footer>
+  </main>
+
+  <main id="screen-admin" class="screen" hidden>
+    <header class="bar">
+      <h1>Administrace</h1>
+      <span class="spacer"></span>
+      <button id="admin-done" class="primary">Hotovo</button>
+    </header>
+
+    <section>
+      <h2>Fotografové</h2>
+      <table class="ph-table">
+        <thead><tr><th>Jméno</th><th>PIN</th><th>Styl</th><th></th></tr></thead>
+        <tbody id="ph-rows"></tbody>
+      </table>
+      <button id="ph-add" type="button">+ Přidat fotografa</button>
+    </section>
+
+    <section>
+      <h2>Styly</h2>
+      <div class="bar">
+        <select id="st-select"></select>
+        <label>Testovací fotka <input id="st-photo" type="file" accept="image/*"></label>
+        <span class="spacer"></span>
+        <button id="st-reset" type="button">Obnovit výchozí</button>
+      </div>
+      <div class="style-editor">
+        <div id="st-sliders" class="sliders"></div>
+        <canvas id="st-preview"></canvas>
+      </div>
+    </section>
+
+    <section>
+      <h2>Nastavení hry</h2>
+      <div class="settings">
+        <fieldset class="dates">
+          <legend>Herní data (datumovka) — zaškrtni aktuální den</legend>
+          <div id="set-dates"></div>
+        </fieldset>
+        <fieldset class="dates">
+          <legend>Běh hry (písmeno v rohu fotky)</legend>
+          <div id="set-run"></div>
+        </fieldset>
+        <label>Admin PIN <input id="set-admin-pin"></label>
+        <span>Archiv: <b id="archive-name">nenastaven</b> <button id="archive-btn" type="button">Vybrat složku archivu</button></span>
+        <div class="bar">
+          <button id="backup-export" type="button">Exportovat nastavení</button>
+          <button id="backup-import" type="button">Importovat nastavení</button>
+          <input id="backup-file" type="file" accept=".json,application/json" hidden>
+          <span id="backup-status"></span>
+        </div>
+        <p class="hint">Přenos na jiný notebook: nastavení, fotografové, styly, herní data a seznam vytištěných fotek. Složku archivu je potřeba vybrat znovu.</p>
+      </div>
+    </section>
+  </main>
+
+  <main id="screen-grid" class="screen" hidden>
+    <header class="bar">
+      <b id="grid-who"></b>
+      <button id="open-card" class="primary">Nahrát fotky</button>
+      <span id="grid-status"></span>
+      <span class="spacer"></span>
+      <label><input type="checkbox" id="show-hidden"> Zobrazit skryté</label>
+      <button id="select-all">Vybrat vše</button>
+      <button id="to-preview" class="primary" disabled>Dál →</button>
+      <button class="logout">Odhlásit</button>
+    </header>
+    <p class="hint">Klik na fotku = vybrat k tisku. ✂ = oříznout a upravit jas. Skrýt = schovat fotku (vytištěné se schovají samy).</p>
+    <div id="grid" class="grid"></div>
+  </main>
+
+  <main id="screen-preview" class="screen" hidden>
+    <header class="bar">
+      <button id="back">← Zpět</button>
+      <span id="preview-status"></span>
+      <span class="spacer"></span>
+      <label><input type="radio" name="layout" value="10x15" checked> 10×15 (1 na list)</label>
+      <label><input type="radio" name="layout" value="a4"> A4 (4 na list)</label>
+      <button id="print-btn" class="primary" disabled>Tisknout a uložit</button>
+    </header>
+    <div id="preview" class="preview"></div>
+  </main>
+
+  <dialog id="crop-dialog">
+    <div class="crop-wrap"><img id="crop-img" alt=""></div>
+    <div class="bar">
+      <button id="crop-rotate">Na výšku / na šířku</button>
+      <label class="brightness">Jas <input id="crop-brightness" type="range" min="50" max="150" step="5" value="100"> <output id="crop-brightness-value">100 %</output></label>
+      <button id="crop-brightness-reset" type="button">Původní jas</button>
+      <span class="spacer"></span>
+      <button id="crop-cancel">Zrušit</button>
+      <button id="crop-ok" class="primary">Hotovo</button>
+    </div>
+  </dialog>
+
+  <div id="print"></div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
