@@ -1,5 +1,7 @@
 # Changelog
 
+## [2026-10-11] - README: popis projektu, stack a spuštění (EN + CZ)
+
 ## [2026-09-25] - Písmeno běhu místo podpisu fotografa
 - Na fotce už není jméno/podpis fotografa; sloupec „Podpis na fotce“ z administrace odstraněn
 - Administrace → Nastavení hry: přepínač „Běh A / B“, písmeno se tiskne malé a průsvitné do levého dolního rohu
